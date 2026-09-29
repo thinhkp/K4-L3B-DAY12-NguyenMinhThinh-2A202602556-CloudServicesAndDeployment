@@ -1,6 +1,7 @@
 # Thông Tin Deploy — Checkpoint 5
 
-> Điền file này sau khi deploy xong. `pytest tests/test_cp5.py` đọc file này
+> Trạng thái hiện tại: phần code/CI đã chuẩn bị; cloud chưa deploy vì chưa có thông tin
+> project/service và secrets Railway. Sau khi deploy, `pytest tests/test_cp5.py` đọc file này
 > để tìm địa chỉ service của bạn và gọi thử.
 >
 > **Chỉ ghi TÊN biến môi trường, tuyệt đối không dán giá trị API key vào đây.**
@@ -10,17 +11,17 @@
 
 | Mục | Nội dung |
 |-----|----------|
-| Họ và tên | (điền họ tên) |
-| Mã học viên | (điền mã học viên) |
-| Repo | (điền link repo K4-L3B-DAY12-HoVaTen-MSSV-CloudServicesAndDeployment) |
+| Họ và tên | Nguyen Minh Thinh |
+| Mã học viên | 2A202602556 |
+| Repo | https://github.com/thinhkp/K4-L3B-DAY12-NguyenMinhThinh-2A202602556-CloudServicesAndDeployment |
 
 ## Service
 
 | Mục | Nội dung |
 |-----|----------|
-| Public URL | https://TODO-thay-bang-url-that.up.railway.app |
-| Platform | Railway / Render / Cloud Run — (điền platform bạn dùng) |
-| Ngày deploy | (điền ngày) |
+| Public URL | Chưa được cấp — cần triển khai Railway |
+| Platform | Railway — chưa triển khai |
+| Ngày deploy | Chưa triển khai |
 
 ## Biến Môi Trường Đã Set Trên Cloud
 
@@ -28,12 +29,12 @@ Ghi tên biến và **nguồn giá trị**, không ghi giá trị:
 
 | Biến | Đã set | Ghi chú |
 |------|--------|---------|
-| `PORT` | ✅ | platform tự gán |
-| `AGENT_API_KEY` | ✅ | đặt trong dashboard, không nằm trong repo |
-| `REDIS_URL` | ✅ | (điền: Redis add-on của platform / Upstash / ...) |
-| `RATE_LIMIT_PER_MINUTE` | ✅ | 10 |
-| `MONTHLY_BUDGET_USD` | ✅ | 10.0 |
-| `LOG_LEVEL` | ✅ | INFO |
+| `PORT` | Chưa set | Platform sẽ tự gán khi triển khai |
+| `AGENT_API_KEY` | Chưa set | Cần thêm trong Railway Variables |
+| `REDIS_URL` | Chưa set | Cần tạo Redis và gắn vào service |
+| `RATE_LIMIT_PER_MINUTE` | Chưa set | Dự kiến 10 |
+| `MONTHLY_BUDGET_USD` | Chưa set | Dự kiến 10.0 |
+| `LOG_LEVEL` | Chưa set | Dự kiến INFO |
 
 ## Lệnh Kiểm Tra
 
@@ -73,7 +74,7 @@ done; echo
 Dán output của các lệnh trên vào đây:
 
 ```
-(điền output)
+(Chưa chạy: chưa có public service URL.)
 ```
 
 ## Ảnh Chụp Màn Hình
@@ -97,5 +98,5 @@ Không đăng ký được tài khoản cloud? Vẫn nộp được bài, nhưng
 5. Ghi rõ lý do không deploy được vào phần dưới đây:
 
 ```
-(điền lý do nếu dùng phương án dự phòng, ngược lại xóa mục này)
+(Chưa dùng phương án dự phòng; Docker daemon/local stack chưa được kiểm chứng.)
 ```

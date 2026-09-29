@@ -1,0 +1,48 @@
+name: CI and deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    name: Test and build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Run checkpoint tests
+        env:
+          AGENT_API_KEY: ci-key
+          REDIS_URL: fake://
+        run: python -m pytest tests/test_cp1.py tests/test_cp2.py tests/test_cp3.py tests/test_cp4.py -v
+      - name: Build Docker image
+        run: docker build -t day12-agent:ci .
+
+  deploy:
+    name: Deploy to Railway
+    needs: test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy latest main
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          RAILWAY_SERVICE_ID: ${{ secrets.RAILWAY_SERVICE_ID }}
+        run: |
+          test -n "$RAILWAY_TOKEN"
+          test -n "$RAILWAY_SERVICE_ID"
+          docker run --rm \
+            -e RAILWAY_TOKEN="$RAILWAY_TOKEN" \
+            -e RAILWAY_SERVICE_ID="$RAILWAY_SERVICE_ID" \
+            -v "$PWD:/workspace" \
+            -w /workspace \
+            ghcr.io/railwayapp/cli:latest \
+            up --ci --service "$RAILWAY_SERVICE_ID"
